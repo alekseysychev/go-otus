@@ -21,6 +21,9 @@ func TestUnpack(t *testing.T) {
 		{input: `qwe\45`, expected: `qwe44444`},
 		{input: `qwe\\5`, expected: `qwe\\\\\`},
 		{input: `qwe\\\3`, expected: `qwe\3`},
+		// more tests
+		{input: "qwe\n3\\3", expected: "qwe\n\n\n3"}, // \n - is one rune
+		{input: `Ⅳ3ↂ2`, expected: "ⅣⅣⅣↂↂ"},           // Ⅳ - is one rune
 	}
 
 	for _, tc := range tests {
