@@ -28,7 +28,8 @@ func Top10(text string) []string {
 		unique[strings.ToLower(word)]++
 	}
 	// делаем из словаря срез
-	slice := []wordStatistic{}
+	slice := make([]wordStatistic, 0, len(unique))
+
 	for word, count := range unique {
 		slice = append(slice, wordStatistic{word, count})
 	}
