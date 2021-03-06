@@ -48,4 +48,40 @@ func TestList(t *testing.T) {
 		}
 		require.Equal(t, []int{70, 80, 60, 40, 10, 30, 50}, elems)
 	})
+
+	t.Run("to100percents", func(t *testing.T) {
+		l := NewList()
+
+		l.PushBack(10)
+		e1 := l.Front()
+		l.Remove(e1)
+
+		l.PushFront(10)
+		l.PushBack(20)
+		l.PushBack(30)
+		e2 := l.Front().Next
+		l.MoveToFront(e2)
+
+		elems := make([]int, 0, l.Len())
+		for i := l.Front(); i != nil; i = i.Next {
+			elems = append(elems, i.Value.(int))
+		}
+		require.Equal(t, []int{20, 10, 30}, elems)
+
+		// require.Equal(t, 0, l.Len())
+		// require.Nil(t, l.Front())
+		// require.Nil(t, l.Back())
+	})
+
+}
+
+func BenchmarkRemove(b *testing.B) {
+	l := NewList()
+	for i := 0; i < b.N; i++ {
+		l.PushFront(0)
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		l.Remove(l.Front())
+	}
 }
