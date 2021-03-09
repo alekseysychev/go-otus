@@ -56,6 +56,7 @@ func (l *list) PushFront(v interface{}) *ListItem {
 
 	return &e
 }
+
 func (l *list) PushBack(v interface{}) *ListItem {
 	// create element
 	var e ListItem = ListItem{
