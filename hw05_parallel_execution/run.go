@@ -18,7 +18,7 @@ func Run(tasks []Task, n, m int) error {
 	wg := &sync.WaitGroup{}
 
 	for _, task := range tasks {
-		if errorCount >= int32(m) { // break if error limit
+		if atomic.LoadInt32(&errorCount) >= int32(m) { // break if error limit
 			r = ErrErrorsLimitExceeded
 			break
 		}
